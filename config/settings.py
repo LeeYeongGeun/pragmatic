@@ -15,6 +15,8 @@ from pathlib import Path
 import environ
 import os
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import reverse_lazy
 
 env = environ.Env(
@@ -53,7 +55,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'profileapp',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
