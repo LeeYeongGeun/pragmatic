@@ -15,7 +15,6 @@ class ProfileCreateView(CreateView):
     model = Profile
     form_class= ProfileCreationForm
     context_object_name = 'target_profile'
-    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'profileapp/create.html'
 
     def form_valid(self, form):
@@ -25,11 +24,16 @@ class ProfileCreateView(CreateView):
 
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('accountapp:detail', kwargs={'pk': self.object.user.pk})
+
 @method_decorator(profile_ownership_required, 'get')
 @method_decorator(profile_ownership_required, 'post')
 class ProfileUpdateView(UpdateView):
     model = Profile
     form_class= ProfileCreationForm
     context_object_name = 'target_profile'
-    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'profileapp/update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('accountapp:detail', kwargs={'pk':self.object.user.pk})
